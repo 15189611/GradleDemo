@@ -106,7 +106,7 @@ hello9.configure {
     description = "this is hello9"
 }
 
-//Gradle 增量式构建
+//Gradle 增量式构建 从sourceDir目录中读取所有的文件，然后将每个文件的内容合并到destination.txt文件中
 task combineFileContentNonIncremental {
     def sources = fileTree('sourceDir')
     def destination = file('destination.txt')
@@ -122,3 +122,6 @@ task combineFileContentNonIncremental {
         }
     }
 }
+
+//自定义task,然后上传到repository,
+

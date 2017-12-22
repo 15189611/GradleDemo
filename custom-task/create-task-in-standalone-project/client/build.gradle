@@ -1,0 +1,12 @@
+buildscript {
+    repositories {
+        maven {
+            url 'file:../lib'
+        }
+
+    }
+
+    dependencies {
+        classpath group: 'charles', name: 'hellotask', version: '1.0'
+    }
+}
