@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+import com.android.build.gradle.api.ApplicationVariant
+import groovy.xml.XmlUtil
 
 android {
     compileSdkVersion 26
@@ -28,6 +30,37 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
     testCompile 'junit:junit:4.12'
 }
+
+//动态向AndroidManifest.xml中 添加渠道号
+project.afterEvaluate {
+    android.applicationVariants.each{ ApplicationVariant variants ->
+        def name = variants.name;
+        def variantsName = name.capitalize();
+        println "nam == ${name}"
+        println "capitalizeName == ${variantsName}"
+        def mergeManifestTask = project.tasks.getByName("process${variantsName}Manifest")
+        println "mergeManifestTask == ${mergeManifestTask}"
+        mergeManifestTask.doLast { mm ->
+            def manifest = mm.manifestOutputFile
+            println "manifest == ${manifest}"
+            if(project.hasProperty("channel")){
+                addChannel(manifest);
+            }
+        }
+    }
+}
+
+def addChannel(File manifest){
+    def channelNo = project.property("channel")
+    println "channelNo == ${channelNo}"
+    def parse = new XmlParser().parse(manifest);
+    println "object == ${parse.application[0]}"
+    parse.application[0].appendNode("meta-data",['android:name':'channel','android:value':channelNo])
+    manifest.withPrintWriter("UTF-8"){
+        XmlUtil.serialize(parse,it)
+    }
+}
+
 
 //（1）调用Project的task()方法创建Task
 

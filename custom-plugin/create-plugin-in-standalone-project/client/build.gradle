@@ -1,0 +1,21 @@
+//apply plugin:charles.DateAndTimePlugin
+
+// 引用插件别名
+apply plugin: 'mytime'
+
+buildscript {
+    repositories {
+        maven {
+            url 'file:../lib'
+        }
+    }
+    dependencies {
+        classpath group: 'charles', name: 'datetimeplugin',
+                version: '1.0'
+    }
+}
+
+dateAndTime {
+    timeFormat = 'HH:mm:ss.SSS'
+    dateFormat = 'MM/dd/yyyy'
+}

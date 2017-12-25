@@ -1,0 +1,41 @@
+version = 'this is  version'
+description = "this is description"
+
+task showProjectProperty <<{
+    println version
+    println project.description
+}
+
+//定义额外的property
+ext.properties1 = "this is properties1"
+
+//闭包方式
+ext{
+    properties2 = "this is properties2"
+}
+
+task showProperties  <<{
+    println properties1
+    println properties2
+}
+
+/*通过命令行参数定义Property
+　　Gradle还提供了-P命令行参数来设置Property，比如：
+    gradle showCommandLieProperties -P properties3="this is 3"
+*/
+
+export ORG_GRADLE_PROJECT_property3="this is yet another property3"
+
+task showCommandLieProperties <<{
+    println property3
+}
+
+
+//通过环境变量设置Property
+//我们还可以通过设置环境变量的方式设置Project的Property。这种方式和（3）一样，
+// 需要我们遵循一些约定：在定义环境变量时，每一个Property都需要以“ORG_GRADLE_PROJECT_”为前缀：
+
+
+
+
+
