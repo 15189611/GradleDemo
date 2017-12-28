@@ -62,10 +62,29 @@ def addChannel(File manifest){
 }
 
 
-//（1）调用Project的task()方法创建Task
+//（1）调用Project的task()方法创建Task,
+//doLast还有一个等价的操作leftShift，leftShift还可以缩写为<<，因此下面的三种实现效果等价：
+
+
+// 定义并配置myTask
+task myTask1 {
+    println "config myTask1"
+}
+
+myTask1.doFirst {
+    println "before execute myTask"
+}
+
+myTask1.doLast{
+    println "after execute myTask"
+}
 
 task helloWord << {
     println 'Hello World! Charles'
+}
+
+helloWord .leftShift {
+    println 'Hello World! Charles--left'
 }
 
 task hello2 {

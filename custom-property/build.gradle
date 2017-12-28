@@ -23,17 +23,16 @@ task showProperties  <<{
 　　Gradle还提供了-P命令行参数来设置Property，比如：
     gradle showCommandLieProperties -P properties3="this is 3"
 */
-
 export ORG_GRADLE_PROJECT_property3="this is yet another property3"
+//通过环境变量设置Property
+//我们还可以通过设置环境变量的方式设置Project的Property。这种方式和（3）一样，
+// 需要我们遵循一些约定：在定义环境变量时，每一个Property都需要以“ORG_GRADLE_PROJECT_”为前缀：
 
 task showCommandLieProperties <<{
     println property3
 }
 
 
-//通过环境变量设置Property
-//我们还可以通过设置环境变量的方式设置Project的Property。这种方式和（3）一样，
-// 需要我们遵循一些约定：在定义环境变量时，每一个Property都需要以“ORG_GRADLE_PROJECT_”为前缀：
 
 
 
